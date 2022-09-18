@@ -324,28 +324,34 @@ PrintMatrix(resultMatrix);
 
 
 
-int GetSumColumns (int [,] matrix)
+double[] GetAvgColumns (int [,] matrix)
 {
     int sumColum =0;
     int rows = matrix.GetLength(0);
     int columns = matrix.GetLength(1);
    
-    int[] avgArray = new int[columns];
+    double[] avgArray = new double[columns];
    
     for (int i = 0; i < columns; i++)
     {
         for (int j = 0; j < rows; j++)
         {
-            sumColum = sumColum + matrix[i, j];
-
+            sumColum = sumColum + matrix[j, i];
         }
-        avgArray[i] = sumColum;
+        
+        avgArray[i] = Math.Round((double)sumColum/rows,1);
         sumColum=0;
     }
     return avgArray;
 } 
 
-int[] sumColumns = GetSumColumns(resultMatrix);
 
+double [] avgColumns = GetAvgColumns(resultMatrix);
 
-Console.WriteLine($"Сумма колонки {sumColumns}");
+Console.WriteLine("Среднее арифметическое элементов в столбцах:");
+
+for (int i = 0; i < avgColumns.Length; i++)
+        {
+            Console.Write(avgColumns[i] + "\t");
+        }
+
